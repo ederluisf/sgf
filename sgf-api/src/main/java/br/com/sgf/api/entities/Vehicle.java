@@ -3,6 +3,18 @@ package br.com.sgf.api.entities;
 import java.io.File;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 import br.com.sgf.api.enums.FuelType;
 
 public class Vehicle extends GenericEntity {
@@ -17,6 +29,7 @@ public class Vehicle extends GenericEntity {
 	private String plate;
 	private FuelType fuel;
 	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	public List<File> getPictures() {
 		return pictures;
 	}
@@ -25,6 +38,8 @@ public class Vehicle extends GenericEntity {
 		this.pictures = pictures;
 	}
 	
+	@Column(name = "year", nullable = false)
+	@NotNull(message = "Year field can not be null!")
 	public int getYear() {
 		return year;
 	}
@@ -33,6 +48,9 @@ public class Vehicle extends GenericEntity {
 		this.year = year;
 	}
 	
+	@Column(name = "model", nullable = false)
+	@Length(max = 60)
+	@NotBlank(message = "Model field can not be empty!")
 	public String getModel() {
 		return model;
 	}
@@ -41,6 +59,9 @@ public class Vehicle extends GenericEntity {
 		this.model = model;
 	}
 	
+	@Column(name = "color", nullable = false)
+	@Length(max = 30)
+	@NotBlank(message = "Color field can not be empty!")
 	public String getColor() {
 		return color;
 	}
@@ -49,6 +70,8 @@ public class Vehicle extends GenericEntity {
 		this.color = color;
 	}
 	
+	@Column(name = "manufacturer")
+	@ManyToOne(fetch = FetchType.EAGER)
 	public Manufacturer getManufacturer() {
 		return manufacturer;
 	}
@@ -57,6 +80,9 @@ public class Vehicle extends GenericEntity {
 		this.manufacturer = manufacturer;
 	}
 	
+	@Column(name = "plate", nullable = false)
+	@Length(max = 30)
+	@NotBlank(message = "Color field can not be empty!")
 	public String getPlate() {
 		return plate;
 	}
@@ -65,6 +91,8 @@ public class Vehicle extends GenericEntity {
 		this.plate = plate;
 	}
 	
+	@Column(name = "fuel_type")
+	@Enumerated(EnumType.STRING)
 	public FuelType getFuel() {
 		return fuel;
 	}
