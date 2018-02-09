@@ -6,12 +6,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.Email;
-
-import br.com.sgf.api.enums.TypeUser;
+import br.com.sgf.api.enums.UserType;
 
 @Entity
-@Table(name = "user")
+@Table(name = "sgf_user")
 public class User extends GenericEntity {
 
 	private static final long serialVersionUID = 1L;
@@ -19,7 +17,7 @@ public class User extends GenericEntity {
 	private String name;
 	private String email;
 	private String password;
-	private TypeUser type;
+	private UserType type;
 	
 	@Column(name = "name", nullable = false)
 	public String getName() {
@@ -30,8 +28,7 @@ public class User extends GenericEntity {
 		this.name = name;
 	}
 	
-	@Column(name = "email", nullable = false, unique = true)
-	@Email
+	@Column(name = "email", nullable = false)
 	public String getEmail() {
 		return email;
 	}
@@ -49,13 +46,13 @@ public class User extends GenericEntity {
 		this.password = password;
 	}
 	
-	@Column(name = "type", nullable = false)
+	@Column(name = "type_user", nullable = false)
 	@Enumerated(EnumType.STRING)
-	public TypeUser getType() {
+	public UserType getType() {
 		return type;
 	}
 	
-	public void setType(TypeUser type) {
+	public void setType(UserType type) {
 		this.type = type;
 	}
 }

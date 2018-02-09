@@ -1,15 +1,13 @@
 package br.com.sgf.api.entities;
 
-import java.io.File;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -17,11 +15,13 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.sgf.api.enums.FuelType;
 
+@Entity
+@Table(name = "vehicle")
 public class Vehicle extends GenericEntity {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<File> pictures;
+//	private List<File> pictures;
 	private int year;
 	private String model;
 	private String color;
@@ -29,14 +29,17 @@ public class Vehicle extends GenericEntity {
 	private String plate;
 	private FuelType fuel;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	public List<File> getPictures() {
-		return pictures;
-	}
 	
-	public void setPictures(List<File> pictures) {
-		this.pictures = pictures;
-	}
+//	TODO - Definir como serão armazenadas as imagens antes de mapear a relação abaixo
+	
+//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	public List<File> getPictures() {
+//		return pictures;
+//	}
+//	
+//	public void setPictures(List<File> pictures) {
+//		this.pictures = pictures;
+//	}
 	
 	@Column(name = "year", nullable = false)
 	@NotNull(message = "Year field can not be null!")
@@ -70,8 +73,8 @@ public class Vehicle extends GenericEntity {
 		this.color = color;
 	}
 	
-	@Column(name = "manufacturer")
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "manufacturer_id")
 	public Manufacturer getManufacturer() {
 		return manufacturer;
 	}
