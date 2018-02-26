@@ -1,6 +1,7 @@
 package br.com.sgf.api.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +21,31 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 	ManufacturerRepository repository;
 	
 	@Override
+	public Optional<Manufacturer> getById(Long id) {
+		log.info("Searching entity by id {}", id);
+		return Optional.ofNullable(repository.findOne(id));
+	}
+
+	@Override
+	public Manufacturer save(Manufacturer manufacturer) {
+		log.info("Saving manufacturer {}", manufacturer.getName());
+		return repository.save(manufacturer);
+	}
+
+	@Override
+	public void delete(Manufacturer manufacturer) {
+		log.info("Removing manufacturer {}", manufacturer.getName());
+		repository.delete(manufacturer);
+	}
+	
+	@Override
 	public List<Manufacturer> findAll() {
 		log.info("Searching all manufacturers");
 		return repository.findAll();
+	}
+	
+	@Override
+	public Optional<Manufacturer> getByName(String name) {
+		return repository.getByName(name);
 	}
 }

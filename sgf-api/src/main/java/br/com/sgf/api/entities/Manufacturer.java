@@ -18,7 +18,7 @@ public class Manufacturer extends GenericEntity {
 	private String name;
 	private File logo;
 	
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = false, unique = true)
 	@Length(max = 60)
 	@NotBlank(message = "Name field can not be empty!")
 	public String getName() {
