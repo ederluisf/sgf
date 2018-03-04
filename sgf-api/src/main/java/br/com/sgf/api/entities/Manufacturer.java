@@ -1,7 +1,5 @@
 package br.com.sgf.api.entities;
 
-import java.io.File;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -16,7 +14,7 @@ public class Manufacturer extends GenericEntity {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-	private File logo;
+	private byte[] logo;
 	
 	@Column(name = "name", nullable = false, unique = true)
 	@Length(max = 60)
@@ -29,11 +27,12 @@ public class Manufacturer extends GenericEntity {
 		this.name = name;
 	}
 	
-	public File getLogo() {
+	@Column(name = "logo")
+	public byte[] getLogo() {
 		return logo;
 	}
 	
-	public void setLogo(File logo) {
+	public void setLogo(byte[] logo) {
 		this.logo = logo;
 	}
 }
