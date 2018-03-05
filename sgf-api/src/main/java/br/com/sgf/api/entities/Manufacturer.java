@@ -5,9 +5,11 @@ import java.io.File;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Entity
 @Table(name = "manufacturer")
@@ -16,7 +18,8 @@ public class Manufacturer extends GenericEntity {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-	private File logo;
+	private byte[] logo;
+	private CommonsMultipartFile file;
 	
 	@Column(name = "name", nullable = false, unique = true)
 	@Length(max = 60)
@@ -29,11 +32,21 @@ public class Manufacturer extends GenericEntity {
 		this.name = name;
 	}
 	
-	public File getLogo() {
+	@Column(name = "logo")
+	public byte[] getLogo() {
 		return logo;
 	}
 	
-	public void setLogo(File logo) {
+	public void setLogo(byte[] logo) {
 		this.logo = logo;
+	}
+
+	@Transient
+	public CommonsMultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(CommonsMultipartFile file) {
+		this.file = file;
 	}
 }
