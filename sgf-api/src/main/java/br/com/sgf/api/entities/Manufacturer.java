@@ -1,7 +1,5 @@
 package br.com.sgf.api.entities;
 
-import java.io.File;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
