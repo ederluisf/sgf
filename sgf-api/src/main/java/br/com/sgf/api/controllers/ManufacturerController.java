@@ -9,10 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,6 +66,36 @@ public class ManufacturerController {
 		
 		if (manufacturerService.getByName(manufacturer.getName()).isPresent()) {
 			response.getErrors().add("Já existe uma montadora com este nome!");
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+		response.setData(manufacturerService.save(manufacturer));
+		return ResponseEntity.ok(response);
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<ResponseWrapper<Manufacturer>> save(@PathVariable("id") Long id, 
+															  @RequestBody @Valid Manufacturer manufacturer,
+															  BindingResult result) {
+		
+		log.info("Updating manufacturer: {}", manufacturer.getName());
+		response = new ResponseWrapper<>();
+		
+		Optional<Manufacturer> savedManufacturer = manufacturerService.getById(id);
+		
+		if (!savedManufacturer.isPresent()) {
+			result.addError(new ObjectError("manufacturer", "Montadora não encotrada"));
+		}
+		
+		if (!savedManufacturer.get().getName().equals(manufacturer.getName())) {
+			if(manufacturerService.getByName(manufacturer.getName()).isPresent()) {
+				result.addError(new ObjectError("manufacturer", "Já existe uma montadora com este nome!"));
+			}
+		}
+		
+		if (result.hasErrors()) {
+			log.error("Erro ao tentar atualizar a montadoira: {}", result.getAllErrors());
+			result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
 			return ResponseEntity.badRequest().body(response);
 		}
 		
