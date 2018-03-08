@@ -33,9 +33,9 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 	}
 
 	@Override
-	public void delete(Manufacturer manufacturer) {
-		log.info("Removing manufacturer {}", manufacturer.getName());
-		repository.delete(manufacturer);
+	public void delete(Long id) {
+		log.info("Removing manufacturer id: {}", id);
+		repository.delete(id);
 	}
 	
 	@Override

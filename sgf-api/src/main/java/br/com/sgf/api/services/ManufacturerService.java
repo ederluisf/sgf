@@ -8,7 +8,7 @@ import br.com.sgf.api.entities.Manufacturer;
 public interface ManufacturerService {
 
 	Manufacturer save(Manufacturer manufacturer);
-	void delete(Manufacturer manufacturer);
+	void delete(Long id);
 	List<Manufacturer> findAll();
 
 	Optional<Manufacturer> getById(Long id);

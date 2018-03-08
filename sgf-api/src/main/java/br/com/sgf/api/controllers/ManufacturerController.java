@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,7 +50,7 @@ public class ManufacturerController {
 		Optional<Manufacturer> manufacturer = manufacturerService.getById(id);
 
 		if(!manufacturer.isPresent()) {
-			log.info("Manufacturer not found to id: " + id);
+			log.info("Manufacturer not found to id: {}", id);
 			response.getErrors().add("Empresa não encontrada para o id: " + id);
 			return ResponseEntity.badRequest().body(response);
 		}
@@ -74,7 +75,7 @@ public class ManufacturerController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<ResponseWrapper<Manufacturer>> save(@PathVariable("id") Long id, 
+	public ResponseEntity<ResponseWrapper<Manufacturer>> update(@PathVariable("id") Long id, 
 															  @RequestBody @Valid Manufacturer manufacturer,
 															  BindingResult result) {
 		
@@ -86,12 +87,13 @@ public class ManufacturerController {
 		if (!savedManufacturer.isPresent()) {
 			result.addError(new ObjectError("manufacturer", "Montadora não encotrada"));
 		}
-		
-		if (!savedManufacturer.get().getName().equals(manufacturer.getName())) {
-			if(manufacturerService.getByName(manufacturer.getName()).isPresent()) {
-				result.addError(new ObjectError("manufacturer", "Já existe uma montadora com este nome!"));
+		else {
+			if(!savedManufacturer.get().getName().equals(manufacturer.getName()) &&
+				(manufacturerService.getByName(manufacturer.getName()).isPresent())) {
+					result.addError(new ObjectError("manufacturer", "Já existe uma montadora com este nome!"));
 			}
 		}
+		
 		
 		if (result.hasErrors()) {
 			log.error("Erro ao tentar atualizar a montadoira: {}", result.getAllErrors());
@@ -101,5 +103,23 @@ public class ManufacturerController {
 		
 		response.setData(manufacturerService.save(manufacturer));
 		return ResponseEntity.ok(response);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<ResponseWrapper<String>> delete(@PathVariable("id") Long id) {
+		ResponseWrapper<String> resp = new ResponseWrapper<>();
+
+		log.info("Removendo montadora de id: {}", id);
+		
+		Optional<Manufacturer> manufacturer = this.manufacturerService.getById(id);
+		
+		if(!manufacturer.isPresent()) {
+			log.info("Erro ao remover lançamento. Registro não encontrado para o id {}", id);
+			resp.getErrors().add("Erro ao remover lançamento. Registro não encontrado para o id " + id);
+			return ResponseEntity.badRequest().body(resp);
+		}
+				
+		manufacturerService.delete(id);
+		return ResponseEntity.ok(resp);
 	}
 }
