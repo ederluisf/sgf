@@ -21,25 +21,12 @@ public class Vehicle extends GenericEntity {
 
 	private static final long serialVersionUID = 1L;
 
-//	private List<File> pictures;
+	private Model model;
 	private int year;
-	private String model;
 	private String color;
-	private Manufacturer manufacturer;
 	private String plate;
 	private FuelType fuel;
-	
-	
-//	TODO - Definir como serão armazenadas as imagens antes de mapear a relação abaixo
-	
-//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	public List<File> getPictures() {
-//		return pictures;
-//	}
-//	
-//	public void setPictures(List<File> pictures) {
-//		this.pictures = pictures;
-//	}
+	// private List<byte[]> pictures;
 	
 	@Column(name = "year", nullable = false)
 	@NotNull(message = "Year field can not be null!")
@@ -51,14 +38,13 @@ public class Vehicle extends GenericEntity {
 		this.year = year;
 	}
 	
-	@Column(name = "model", nullable = false)
-	@Length(max = 60)
-	@NotBlank(message = "Model field can not be empty!")
-	public String getModel() {
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_id")
+	public Model getModel() {
 		return model;
 	}
 	
-	public void setModel(String model) {
+	public void setModel(Model model) {
 		this.model = model;
 	}
 	
@@ -71,16 +57,6 @@ public class Vehicle extends GenericEntity {
 	
 	public void setColor(String color) {
 		this.color = color;
-	}
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "manufacturer_id")
-	public Manufacturer getManufacturer() {
-		return manufacturer;
-	}
-	
-	public void setManufacturer(Manufacturer manufacturer) {
-		this.manufacturer = manufacturer;
 	}
 	
 	@Column(name = "plate", nullable = false)
