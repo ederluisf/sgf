@@ -23,13 +23,23 @@ public class Vehicle extends GenericEntity {
 
 	private Model model;
 	private int year;
+	private String engine;
 	private String color;
 	private String plate;
 	private FuelType fuel;
 	private String chassis;
 	private Integer initialMileage;
 	private Integer currentMileage;
-	// private List<byte[]> pictures;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_id")
+	public Model getModel() {
+		return model;
+	}
+	
+	public void setModel(Model model) {
+		this.model = model;
+	}
 	
 	@Column(name = "year", nullable = false)
 	@NotNull(message = "Year field can not be null!")
@@ -41,14 +51,13 @@ public class Vehicle extends GenericEntity {
 		this.year = year;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "model_id")
-	public Model getModel() {
-		return model;
+	@Column(name = "engine")
+	public String getEngine() {
+		return engine;
 	}
 	
-	public void setModel(Model model) {
-		this.model = model;
+	public void setEngine(String engine) {
+		this.engine = engine;
 	}
 	
 	@Column(name = "color", nullable = false)

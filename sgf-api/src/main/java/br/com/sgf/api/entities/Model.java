@@ -18,7 +18,6 @@ public class Model extends GenericEntity {
 	private Manufacturer manufacturer;
 	private String name;
 	private String version;
-	private String engine;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "manufacturer_id")
@@ -47,14 +46,5 @@ public class Model extends GenericEntity {
 	
 	public void setVersion(String version) {
 		this.version = version;
-	}
-	
-	@Column(name = "engine")
-	public String getEngine() {
-		return engine;
-	}
-	
-	public void setEngine(String engine) {
-		this.engine = engine;
 	}
 }
