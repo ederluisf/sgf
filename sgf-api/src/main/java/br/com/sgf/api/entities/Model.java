@@ -17,6 +17,7 @@ public class Model extends GenericEntity {
 
 	private Manufacturer manufacturer;
 	private String name;
+	private String version;
 	private String engine;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -28,15 +29,6 @@ public class Model extends GenericEntity {
 	public void setManufacturer(Manufacturer manufacturer) {
 		this.manufacturer = manufacturer;
 	}
-
-	@Column(name = "engine")
-	public String getEngine() {
-		return engine;
-	}
-
-	public void setEngine(String engine) {
-		this.engine = engine;
-	}
 	
 	@Column(name = "name")
 	@NotBlank(message = "Name field can not be empty!")
@@ -46,5 +38,23 @@ public class Model extends GenericEntity {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@Column(name = "version")
+	public String getVersion() {
+		return version;
+	}
+	
+	public void setVersion(String version) {
+		this.version = version;
+	}
+	
+	@Column(name = "engine")
+	public String getEngine() {
+		return engine;
+	}
+	
+	public void setEngine(String engine) {
+		this.engine = engine;
 	}
 }

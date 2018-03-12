@@ -26,6 +26,9 @@ public class Vehicle extends GenericEntity {
 	private String color;
 	private String plate;
 	private FuelType fuel;
+	private String chassis;
+	private Integer initialMileage;
+	private Integer currentMileage;
 	// private List<byte[]> pictures;
 	
 	@Column(name = "year", nullable = false)
@@ -78,5 +81,32 @@ public class Vehicle extends GenericEntity {
 
 	public void setFuel(FuelType fuel) {
 		this.fuel = fuel;
+	}
+
+	@Column(name = "chassis")
+	public String getChassis() {
+		return chassis;
+	}
+
+	public void setChassis(String chassis) {
+		this.chassis = chassis;
+	}
+
+	@Column(name = "initial_mileage")
+	public Integer getInitialMileage() {
+		return initialMileage;
+	}
+
+	public void setInitialMileage(Integer initialMileage) {
+		this.initialMileage = initialMileage;
+	}
+
+	@Column(name = "current_mileage")
+	public Integer getCurrentMileage() {
+		return currentMileage;
+	}
+
+	public void setCurrentMileage(Integer currentMileage) {
+		this.currentMileage = currentMileage;
 	}
 }
