@@ -96,7 +96,7 @@ public class ManufacturerController {
 		
 		
 		if (result.hasErrors()) {
-			log.error("Erro ao tentar atualizar a montadoira: {}", result.getAllErrors());
+			log.error("Erro ao tentar atualizar a montadora: {}", result.getAllErrors());
 			result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
 			return ResponseEntity.badRequest().body(response);
 		}
@@ -113,9 +113,9 @@ public class ManufacturerController {
 		
 		Optional<Manufacturer> manufacturer = this.manufacturerService.getById(id);
 		
-		if(!manufacturer.isPresent()) {
-			log.info("Erro ao remover lançamento. Registro não encontrado para o id {}", id);
-			resp.getErrors().add("Erro ao remover lançamento. Registro não encontrado para o id " + id);
+		if (!manufacturer.isPresent()) {
+			log.info("Erro ao remover montadora. Registro não encontrado para o id {}", id);
+			resp.getErrors().add("Erro ao remover montadora. Registro não encontrado para o id " + id);
 			return ResponseEntity.badRequest().body(resp);
 		}
 				
