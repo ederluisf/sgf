@@ -20,10 +20,10 @@ import br.com.sgf.api.enums.FuelType;
 public class Vehicle extends GenericEntity {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	private Model model;
 	private int year;
-	private String engine;
+	private Float engine;
 	private String color;
 	private String plate;
 	private FuelType fuel;
@@ -52,11 +52,11 @@ public class Vehicle extends GenericEntity {
 	}
 	
 	@Column(name = "engine")
-	public String getEngine() {
+	public Float getEngine() {
 		return engine;
 	}
 	
-	public void setEngine(String engine) {
+	public void setEngine(Float engine) {
 		this.engine = engine;
 	}
 	
