@@ -10,5 +10,5 @@ import br.com.sgf.api.entities.Manufacturer;
 @Transactional
 public interface ManufacturerRepository extends JpaRepository<Manufacturer, Long> {
 
-	Optional<Manufacturer> getByName(String name);
+	Optional<Manufacturer> getByNameIgnoreCase(String name);
 }

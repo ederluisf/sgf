@@ -45,7 +45,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 	}
 	
 	@Override
-	public Optional<Manufacturer> getByName(String name) {
-		return repository.getByName(name);
+	public Optional<Manufacturer> getByNameIgnoreCase(String name) {
+		return repository.getByNameIgnoreCase(name);
 	}
 }
