@@ -65,7 +65,7 @@ public class ManufacturerController {
 		
 		log.info("Saving {} manufacturer", manufacturer.getName());
 		
-		if (manufacturerService.getByName(manufacturer.getName()).isPresent()) {
+		if (manufacturerService.getByNameIgnoreCase(manufacturer.getName()).isPresent()) {
 			response.getErrors().add("Já existe uma montadora com este nome!");
 			return ResponseEntity.badRequest().body(response);
 		}
@@ -89,7 +89,7 @@ public class ManufacturerController {
 		}
 		else {
 			if(!savedManufacturer.get().getName().equals(manufacturer.getName()) &&
-				(manufacturerService.getByName(manufacturer.getName()).isPresent())) {
+				(manufacturerService.getByNameIgnoreCase(manufacturer.getName()).isPresent())) {
 					result.addError(new ObjectError("manufacturer", "Já existe uma montadora com este nome!"));
 			}
 		}

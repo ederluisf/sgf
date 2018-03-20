@@ -12,5 +12,5 @@ public interface ManufacturerService {
 	List<Manufacturer> findAll();
 
 	Optional<Manufacturer> getById(Long id);
-	Optional<Manufacturer> getByName(String name);
+	Optional<Manufacturer> getByNameIgnoreCase(String name);
 }

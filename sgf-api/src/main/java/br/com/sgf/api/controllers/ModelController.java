@@ -66,7 +66,7 @@ public class ModelController {
 		log.info("Saving {} manufacturer", model.getName());
 		
 		if (modelService.getByName(model.getName()).isPresent()) {
-			response.getErrors().add("Já existe uma montadora com este nome!");
+			response.getErrors().add("Já existe um modelo com este nome!");
 			return ResponseEntity.badRequest().body(response);
 		}
 		
