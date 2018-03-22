@@ -9,6 +9,7 @@ public class ResponseWrapper<T> {
 	private List<String> errors;
 
 	public ResponseWrapper() {
+		super();
 	}
 
 	public T getData() {
@@ -21,7 +22,7 @@ public class ResponseWrapper<T> {
 
 	public List<String> getErrors() {
 		if (this.errors == null) {
-			this.errors = new ArrayList<String>();
+			this.errors = new ArrayList<>();
 		}
 		return errors;
 	}
