@@ -8,10 +8,10 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.sgf.api.enums.FuelType;
 
@@ -62,7 +62,7 @@ public class Vehicle extends GenericEntity {
 	
 	@Column(name = "color", nullable = false)
 	@Length(max = 30)
-	@NotBlank(message = "Color field can not be empty!")
+	@NotEmpty(message = "Color field can not be empty!")
 	public String getColor() {
 		return color;
 	}
@@ -73,7 +73,7 @@ public class Vehicle extends GenericEntity {
 	
 	@Column(name = "plate", nullable = false)
 	@Length(max = 30)
-	@NotBlank(message = "Color field can not be empty!")
+	@NotEmpty(message = "Color field can not be empty!")
 	public String getPlate() {
 		return plate;
 	}

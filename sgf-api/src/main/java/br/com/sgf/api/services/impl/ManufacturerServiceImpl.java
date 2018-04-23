@@ -23,7 +23,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 	@Override
 	public Optional<Manufacturer> getById(Long id) {
 		log.info("Searching entity by id {}", id);
-		return Optional.ofNullable(repository.findOne(id));
+		return repository.findById(id);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 	@Override
 	public void delete(Long id) {
 		log.info("Removing manufacturer id: {}", id);
-		repository.delete(id);
+		repository.deleteById(id);
 	}
 	
 	@Override

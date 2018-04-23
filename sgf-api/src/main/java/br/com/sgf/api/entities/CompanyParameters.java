@@ -5,9 +5,9 @@ import java.io.File;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "company_parameters")
@@ -20,7 +20,7 @@ public class CompanyParameters extends GenericEntity {
 
 	@Column(name = "name", nullable = false)
 	@Length(max = 60)
-	@NotBlank(message = "Name field can not be empty!")
+	@NotEmpty(message = "Name field can not be empty!")
 	public String getName() {
 		return name;
 	}

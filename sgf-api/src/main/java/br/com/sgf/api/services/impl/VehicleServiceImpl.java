@@ -23,7 +23,7 @@ public class VehicleServiceImpl implements VehicleService {
 	@Override
 	public Optional<Vehicle> getById(Long id) {
 		log.info("Searching entity by id {}", id);
-		return Optional.ofNullable(repository.findOne(id));
+		return repository.findById(id);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class VehicleServiceImpl implements VehicleService {
 	@Override
 	public void delete(Long id) {
 		log.info("Removing vehicle id: {}", id);
-		repository.delete(id);
+		repository.deleteById(id);
 	}
 	
 	@Override

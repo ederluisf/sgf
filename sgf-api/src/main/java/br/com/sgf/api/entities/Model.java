@@ -6,8 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "model")
@@ -30,7 +29,7 @@ public class Model extends GenericEntity {
 	}
 	
 	@Column(name = "name")
-	@NotBlank(message = "Name field can not be empty!")
+	@NotEmpty(message = "Name field can not be empty!")
 	public String getName() {
 		return name;
 	}
