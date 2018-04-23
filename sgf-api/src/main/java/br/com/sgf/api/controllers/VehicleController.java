@@ -93,7 +93,7 @@ public class VehicleController {
 		Optional<Vehicle> savedVehicle = vehicleService.getById(id);
 		
 		if (!savedVehicle.isPresent()) {
-			result.addError(new ObjectError("model", "Vehicleo não encotrado"));
+			result.addError(new ObjectError("model", "Veículo não encotrado"));
 		}
 		else {
 			if(!savedVehicle.get().getModel().getName().equals(vehicle.getModel().getName()) &&
