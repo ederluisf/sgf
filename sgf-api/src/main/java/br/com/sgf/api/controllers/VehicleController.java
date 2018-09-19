@@ -67,9 +67,10 @@ public class VehicleController {
 		
 		String modelName = vehicle.getModel().getName();
 		String modelVersion = vehicle.getModel().getVersion();
+		Float engine = vehicle.getEngine();
 		
-		if (vehicleService.getByModelNameAndModelVersion(modelName, modelVersion).isPresent()) {
-			response.getErrors().add("Já existe um veículo com este modelo e versão!");
+		if (vehicleService.getByModelNameAndModelVersionAndEngine(modelName, modelVersion, engine).isPresent()) {
+			response.getErrors().add("Já existe um veículo com este modelo, versão e tipo de motor!");
 			return ResponseEntity.badRequest().body(response);
 		}
 		

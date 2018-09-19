@@ -1,9 +1,11 @@
 package br.com.sgf.api.enums;
 
 public enum FuelType {
-	GASOLINE("Gasoline"),
 	ALCOHOL("Alcohol"), 
-	GAS("Gas");
+	ALCOHOL_GASOLINE("Alcohol_Gasoline"),
+	DIESEL("DIESEL"),
+	GAS("Gas"),
+	GASOLINE("Gasoline");
    
 	private String type;
 	

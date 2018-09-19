@@ -31,7 +31,7 @@ public class Vehicle extends GenericEntity {
 	private Integer initialMileage;
 	private Integer currentMileage;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "model_id")
 	public Model getModel() {
 		return model;

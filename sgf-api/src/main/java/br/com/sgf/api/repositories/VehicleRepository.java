@@ -11,6 +11,6 @@ import br.com.sgf.api.entities.Vehicle;
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 	
 	Optional<Vehicle> getByModelName(String name);
-	Optional<Vehicle> getByModelNameAndModelVersion(String name, String version);
+	Optional<Vehicle> getByModelNameAndModelVersionAndEngine(String name, String version, Float engine);
 	Optional<Vehicle> getByPlate(String plate);
 }

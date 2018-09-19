@@ -13,6 +13,6 @@ public interface VehicleService {
 
 	Optional<Vehicle> getById(Long id);
 	Optional<Vehicle> getByModelName(String name);
-	Optional<Vehicle> getByModelNameAndModelVersion(String name, String version);
+	Optional<Vehicle> getByModelNameAndModelVersionAndEngine(String name, String version, Float engine);
 	Optional<Vehicle> getByPlate(String plate);
 }

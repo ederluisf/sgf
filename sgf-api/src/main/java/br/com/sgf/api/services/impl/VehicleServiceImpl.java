@@ -50,8 +50,8 @@ public class VehicleServiceImpl implements VehicleService {
 	}
 
 	@Override
-	public Optional<Vehicle> getByModelNameAndModelVersion(String name, String version) {
-		return repository.getByModelNameAndModelVersion(name, version);
+	public Optional<Vehicle> getByModelNameAndModelVersionAndEngine(String name, String version, Float engine) {
+		return repository.getByModelNameAndModelVersionAndEngine(name, version, engine);
 	}
 	
 	@Override
